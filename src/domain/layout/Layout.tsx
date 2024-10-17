@@ -9,7 +9,7 @@ const LayoutBase = ({ children }: LayoutProps) => {
     <div className="w-full h-full flex flex-col bg-gray-900 text-gray-200">
       <Navbar />
 
-      <div className="p-12">{children}</div>
+      {children}
     </div>
   )
 }

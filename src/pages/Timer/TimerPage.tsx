@@ -9,7 +9,7 @@ const TimerPageBase = () => {
 
   return (
     <Page>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between h-full w-full">
         <div />
 
         <p className="text-9xl">{(time / 1000).toFixed(2)}</p>

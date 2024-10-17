@@ -3,7 +3,7 @@ import { memo, PropsWithChildren } from 'react'
 type PageProps = PropsWithChildren
 
 const PageBase = ({ children }: PageProps) => {
-  return <div className="h-full w-full p-12">{children}</div>
+  return <main className="h-full w-full p-12">{children}</main>
 }
 
 export const Page = memo(PageBase)

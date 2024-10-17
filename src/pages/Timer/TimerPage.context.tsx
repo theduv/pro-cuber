@@ -38,7 +38,7 @@ const TimerPageContextProviderBase = ({
     requestRef.current = requestAnimationFrame(animate)
   }
 
-  const startTimer = useCallback(
+  const keyupHandler = useCallback(
     (e: KeyboardEvent) => {
       const keyPressedCode = e.code
 
@@ -53,7 +53,7 @@ const TimerPageContextProviderBase = ({
     [isPressingKeyRef, isRunningRef, animate],
   )
 
-  const stopTimer = useCallback(() => {
+  const keydownHandler = useCallback(() => {
     if (!isRunningRef.current) return
 
     isPressingKeyRef.current = true
@@ -65,14 +65,14 @@ const TimerPageContextProviderBase = ({
   }, [isPressingKeyRef, isRunningRef])
 
   useEffect(() => {
-    window.addEventListener('keydown', stopTimer)
-    window.addEventListener('keyup', startTimer)
+    window.addEventListener('keydown', keydownHandler)
+    window.addEventListener('keyup', keyupHandler)
 
     return () => {
-      window.removeEventListener('keydown', stopTimer)
-      window.removeEventListener('keyup', startTimer)
+      window.removeEventListener('keydown', keydownHandler)
+      window.removeEventListener('keyup', keyupHandler)
     }
-  }, [stopTimer, startTimer])
+  }, [keydownHandler, keyupHandler])
 
   const contextValue = {
     time,
