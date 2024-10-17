@@ -11,10 +11,14 @@ import {
 const STARTING_KEY = 'Space'
 
 type TimerPageContextValue = {
+  isPressingStartingKey: boolean
+  isTimerRunning: boolean
   time: number
 }
 
 export const TimerPageContext = createContext<TimerPageContextValue>({
+  isPressingStartingKey: false,
+  isTimerRunning: false,
   time: 0,
 })
 
@@ -24,45 +28,67 @@ const TimerPageContextProviderBase = ({
   children,
 }: TimerPageContextProviderProps) => {
   const [time, setTime] = useState(0)
+  const [isPressingStartingKey, setIsPressingStartingKey] = useState(false)
+  const [isTimerRunning, setIsTimerRunning] = useState(false)
+
   const requestRef = useRef<number | null>(null)
   const previousTimeRef = useRef<number | null>(null)
   const isPressingKeyRef = useRef<boolean>(false)
-  const isRunningRef = useRef<boolean>(false)
 
-  const animate = (time: number) => {
-    if (previousTimeRef.current !== null) {
-      const deltaTime = time - previousTimeRef.current
-      setTime((prevTime) => prevTime + deltaTime)
-    }
-    previousTimeRef.current = time
-    requestRef.current = requestAnimationFrame(animate)
-  }
+  const animate = useCallback(
+    (time: number) => {
+      if (previousTimeRef.current !== null) {
+        const deltaTime = time - previousTimeRef.current
+        setTime((prevTime) => prevTime + deltaTime)
+      }
+
+      previousTimeRef.current = time
+      requestRef.current = requestAnimationFrame(animate)
+    },
+    [previousTimeRef, setTime],
+  )
 
   const keyupHandler = useCallback(
     (e: KeyboardEvent) => {
+      setIsPressingStartingKey(false)
+
       const keyPressedCode = e.code
+
+      const oldIsPressingKey = isPressingKeyRef.current
+
+      isPressingKeyRef.current = false
 
       if (keyPressedCode !== STARTING_KEY) return
 
-      if (isPressingKeyRef.current) return
+      if (oldIsPressingKey || isTimerRunning) {
+        return
+      }
 
+      setTime(0)
       requestRef.current = requestAnimationFrame(animate)
-      isRunningRef.current = true
-      isPressingKeyRef.current = false
+
+      setIsTimerRunning(true)
     },
-    [isPressingKeyRef, isRunningRef, animate],
+    [isPressingKeyRef, isTimerRunning, setIsPressingStartingKey, animate],
   )
 
-  const keydownHandler = useCallback(() => {
-    if (!isRunningRef.current) return
+  const keydownHandler = useCallback(
+    (e: KeyboardEvent) => {
+      const keyPressedCode = e.code
 
-    isPressingKeyRef.current = true
+      if (keyPressedCode === STARTING_KEY) setIsPressingStartingKey(true)
 
-    cancelAnimationFrame(requestRef.current!)
-    requestRef.current = null
-    previousTimeRef.current = null
-    isRunningRef.current = false
-  }, [isPressingKeyRef, isRunningRef])
+      if (!isTimerRunning || !requestRef.current) return
+
+      cancelAnimationFrame(requestRef.current)
+
+      isPressingKeyRef.current = true
+      requestRef.current = null
+      previousTimeRef.current = null
+      setIsTimerRunning(false)
+    },
+    [isPressingKeyRef, setIsPressingStartingKey, isTimerRunning],
+  )
 
   useEffect(() => {
     window.addEventListener('keydown', keydownHandler)
@@ -75,8 +101,12 @@ const TimerPageContextProviderBase = ({
   }, [keydownHandler, keyupHandler])
 
   const contextValue = {
+    isPressingStartingKey,
+    isTimerRunning,
     time,
   }
+
+  console.log(isPressingKeyRef.current)
 
   return (
     <TimerPageContext.Provider value={contextValue}>
