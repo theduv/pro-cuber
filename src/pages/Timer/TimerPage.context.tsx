@@ -1,4 +1,3 @@
-import { noop } from 'lodash'
 import {
   createContext,
   memo,
@@ -51,7 +50,7 @@ const TimerPageContextProviderBase = ({
         isPressingKeyRef.current = false
       }
     },
-    [isPressingKeyRef, isRunningRef],
+    [isPressingKeyRef, isRunningRef, animate],
   )
 
   const stopTimer = useCallback(() => {

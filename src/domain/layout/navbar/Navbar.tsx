@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import { Link } from 'wouter'
+
 import { routes } from '../../../router/router'
 
 const NavbarBase = () => {

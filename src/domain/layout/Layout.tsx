@@ -1,4 +1,5 @@
 import { memo, PropsWithChildren } from 'react'
+
 import { Navbar } from './navbar/Navbar'
 
 type LayoutProps = PropsWithChildren

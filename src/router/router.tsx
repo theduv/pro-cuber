@@ -1,7 +1,6 @@
 import { Route } from 'wouter'
 
 import { Layout } from '../domain/layout/Layout'
-
 import HomePage from '../pages/Home/HomePage'
 import TimerPage from '../pages/Timer/TimerPage.container'
 

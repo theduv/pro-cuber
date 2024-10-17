@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
-import { TimerPageContextProvider } from './TimerPage.context'
 import { TimerPage } from './TimerPage'
+import { TimerPageContextProvider } from './TimerPage.context'
 
 const TimerPageContainerBase = () => {
   return (
