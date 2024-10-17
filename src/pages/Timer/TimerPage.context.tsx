@@ -44,11 +44,11 @@ const TimerPageContextProviderBase = ({
 
       if (keyPressedCode !== STARTING_KEY) return
 
-      if (!isPressingKeyRef.current) {
-        requestRef.current = requestAnimationFrame(animate)
-        isRunningRef.current = true
-        isPressingKeyRef.current = false
-      }
+      if (isPressingKeyRef.current) return
+
+      requestRef.current = requestAnimationFrame(animate)
+      isRunningRef.current = true
+      isPressingKeyRef.current = false
     },
     [isPressingKeyRef, isRunningRef, animate],
   )
@@ -58,12 +58,10 @@ const TimerPageContextProviderBase = ({
 
     isPressingKeyRef.current = true
 
-    if (isRunningRef.current) {
-      cancelAnimationFrame(requestRef.current!)
-      requestRef.current = null
-      previousTimeRef.current = null
-      isRunningRef.current = false
-    }
+    cancelAnimationFrame(requestRef.current!)
+    requestRef.current = null
+    previousTimeRef.current = null
+    isRunningRef.current = false
   }, [isPressingKeyRef, isRunningRef])
 
   useEffect(() => {
