@@ -31,7 +31,10 @@ const TimesTableBase = () => {
   )
 
   return (
-    <Table className="w-full max-w-80 text-gray-200" dataSource={dataSource}>
+    //TODO: override this component with a custom one
+    <Table
+      className="w-full max-w-80 text-gray-200 h-full"
+      dataSource={dataSource}>
       {columns.map((col) => (
         <Table.Column
           key={col.dataIndex}
