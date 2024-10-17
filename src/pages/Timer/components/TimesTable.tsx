@@ -1,32 +1,37 @@
 import { Table } from 'antd'
-import { memo } from 'react'
+import { memo, useContext, useMemo } from 'react'
+
+import { TimerPageContext } from '../TimerPage.context'
 
 const columns = [
   {
     title: 'Single',
     dataIndex: 'single',
   },
-  {
-    title: 'Avg5',
-    dataIndex: 'avg5',
-  },
-  {
-    title: 'Avg12',
-    dataIndex: 'avg12',
-  },
-  {
-    title: 'Avg50',
-    dataIndex: 'avg50',
-  },
-  {
-    title: 'Avg100',
-    dataIndex: 'avg100',
-  },
 ]
 
+//TODO: use a hook to get the data source
+const getDataSource = () => {
+  const data = (localStorage.getItem('times') || '').split(';')
+
+  return data.map((time, index) => ({
+    key: index,
+    single: (parseFloat(time) / 1000).toFixed(2),
+  }))
+}
+
 const TimesTableBase = () => {
+  const { isTimerRunning } = useContext(TimerPageContext)
+
+  const dataSource = useMemo(
+    () => getDataSource(),
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isTimerRunning],
+  )
+
   return (
-    <Table className="w-full max-w-80 text-gray-200">
+    <Table className="w-full max-w-80 text-gray-200" dataSource={dataSource}>
       {columns.map((col) => (
         <Table.Column
           key={col.dataIndex}
