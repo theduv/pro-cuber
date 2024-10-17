@@ -1,6 +1,6 @@
 import './index.css'
-import { StyleProvider } from '@ant-design/cssinjs'
 
+import { StyleProvider } from '@ant-design/cssinjs'
 import { createRoot } from 'react-dom/client'
 
 import { AppRouter } from './router/router'

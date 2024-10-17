@@ -40,4 +40,3 @@ const TimesTableBase = () => {
 }
 
 export const TimesTable = memo(TimesTableBase)
-1

@@ -1,10 +1,9 @@
+import clsx from 'clsx'
 import { memo, useContext } from 'react'
 
-import clsx from 'clsx'
-
 import { Page } from '../../domain/page/Page'
-import { TimerPageContext } from './TimerPage.context'
 import { TimesTable } from './components/TimesTable'
+import { TimerPageContext } from './TimerPage.context'
 
 const TimerPageBase = () => {
   const { time, isPressingStartingKey, isTimerRunning } =
