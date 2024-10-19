@@ -1,7 +1,7 @@
-import { Table } from 'antd'
 import { memo, useContext, useMemo } from 'react'
 
 import { TimerPageContext } from '../TimerPage.context'
+import Table from '../../../components/table/Table'
 
 const columns = [
   {
@@ -32,18 +32,7 @@ const TimesTableBase = () => {
 
   return (
     //TODO: override this component with a custom one
-    <Table
-      className="w-full max-w-80 text-gray-200 h-full"
-      dataSource={dataSource}>
-      {columns.map((col) => (
-        <Table.Column
-          key={col.dataIndex}
-          title={col.title}
-          dataIndex={col.dataIndex}
-          className="bg-gray-600 text-gray-200"
-        />
-      ))}
-    </Table>
+    <></>
   )
 }
 
