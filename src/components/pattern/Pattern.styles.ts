@@ -5,6 +5,7 @@ export const cube = css({
   gridTemplateColumns: 'repeat(4, 1fr)',
   gridTemplateRows: 'repeat(3, 1fr)',
   gap: '4px',
+  width: 'fit-content',
 })
 
 export const face = css({

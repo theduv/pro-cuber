@@ -21,14 +21,12 @@ const TimerPageBase = () => {
   return (
     <Page>
       <div className={styles.mainContainer}>
-        <div>
+        <div className={styles.scrambleCard}>
           <div className={styles.scrambleContainer}>{currentScramble}</div>
+          <Pattern cube={scrambleCube(cube, currentScramble)} />
         </div>
-        <Pattern cube={scrambleCube(cube, currentScramble)} />
 
         <TimeDisplay />
-
-        <div />
       </div>
     </Page>
   )
