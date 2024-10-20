@@ -294,8 +294,6 @@ export const scrambleCube = (cube: Cube, scramble: string): Cube => {
 
     for (let i = 0; i < numberOfRotations; i++) {
       newCube = cubeMovementsMap[rotation](newCube)
-
-      console.log(newCube)
     }
   }
   return newCube

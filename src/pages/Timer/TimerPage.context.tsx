@@ -29,9 +29,12 @@ export const TimerPageContext = createContext<TimerPageContextValue>({
 type TimerPageContextProviderProps = PropsWithChildren
 
 const saveTimeToLocalStorage = (time: number) => {
-  const timesFromLocalStorage = (localStorage.getItem('times') || '').split(';')
+  const timesFromLocalStorage = localStorage.getItem('times')
+  const parsedTimesFromLocalStorage = timesFromLocalStorage
+    ? timesFromLocalStorage.split(';')
+    : []
 
-  const newTimesArray = [...timesFromLocalStorage]
+  const newTimesArray = [...parsedTimesFromLocalStorage]
 
   newTimesArray.push(time.toString())
 
@@ -84,6 +87,8 @@ const TimerPageContextProviderBase = ({
 
       if (keyPressedCode !== STARTING_KEY) return
 
+      console.log(oldIsPressingKey)
+
       if (oldIsPressingKey || isTimerRunning) {
         return
       }
@@ -106,7 +111,7 @@ const TimerPageContextProviderBase = ({
       cancelAnimationFrame(requestRef.current)
       saveTimeToLocalStorage(time)
 
-      isPressingKeyRef.current = false
+      isPressingKeyRef.current = true
       requestRef.current = null
       previousTimeRef.current = null
       setIsTimerRunning(false)

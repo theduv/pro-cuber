@@ -21,8 +21,6 @@ const FaceComponent = ({ face, index }: { face: Face; index: number }) => (
 )
 
 const PatternBase = ({ cube }: PatternProps) => {
-  console.log(cube['L'])
-
   return (
     <div className={styles.cube}>
       {Object.keys(cube).map((face, i) => (

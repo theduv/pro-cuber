@@ -4,14 +4,13 @@ export const mainContainer = css({
   width: 'full',
   height: 'full',
   display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
+  justifyContent: 'space-between',
   alignItems: 'center',
   position: 'relative',
 })
 
 export const scrambleContainer = css({
-  fontSize: 'xl',
+  fontSize: '1.5rem',
   fontWeight: 'semi-bold',
   marginBottom: 4,
 })
