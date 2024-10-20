@@ -9,6 +9,7 @@ import {
 } from 'react'
 
 import { randomScrambleForEvent } from 'cubing/scramble'
+import { noop } from 'lodash'
 
 const STARTING_KEY = 'Space'
 
@@ -17,6 +18,8 @@ type TimerPageContextValue = {
   isTimerRunning: boolean
   time: number
   currentScramble: string
+  onResetTimesList: () => void
+  timesList: string[]
 }
 
 export const TimerPageContext = createContext<TimerPageContextValue>({
@@ -24,9 +27,18 @@ export const TimerPageContext = createContext<TimerPageContextValue>({
   isTimerRunning: false,
   time: 0,
   currentScramble: '',
+  onResetTimesList: noop,
+  timesList: [],
 })
 
 type TimerPageContextProviderProps = PropsWithChildren
+
+const getTimesFromLocalStorage = () => {
+  const timesFromLocalStorage = localStorage.getItem('times')
+  const data = timesFromLocalStorage ? timesFromLocalStorage.split(';') : []
+
+  return data.map((time) => (parseFloat(time) / 1000).toFixed(2))
+}
 
 const saveTimeToLocalStorage = (time: number) => {
   const timesFromLocalStorage = localStorage.getItem('times')
@@ -48,10 +60,16 @@ const TimerPageContextProviderBase = ({
   const [isPressingStartingKey, setIsPressingStartingKey] = useState(false)
   const [isTimerRunning, setIsTimerRunning] = useState(false)
   const [currentScramble, setCurrentScramble] = useState('')
+  const [timesList, setTimesList] = useState<string[]>([])
 
   const requestRef = useRef<number | null>(null)
   const previousTimeRef = useRef<number | null>(null)
   const isPressingKeyRef = useRef<boolean>(false)
+
+  const onResetTimesList = () => {
+    localStorage.removeItem('times')
+    updateTimeFromLocalStorage()
+  }
 
   const updateScramble = useCallback(async () => {
     const res = await randomScrambleForEvent('333')
@@ -59,8 +77,15 @@ const TimerPageContextProviderBase = ({
     setCurrentScramble(res.toString())
   }, [setCurrentScramble])
 
+  const updateTimeFromLocalStorage = useCallback(() => {
+    const timesFromLocalStorage = getTimesFromLocalStorage()
+
+    setTimesList(timesFromLocalStorage)
+  }, [setTimesList])
+
   useEffect(() => {
     updateScramble()
+    updateTimeFromLocalStorage()
   }, [])
 
   const animate = useCallback(
@@ -110,6 +135,7 @@ const TimerPageContextProviderBase = ({
 
       cancelAnimationFrame(requestRef.current)
       saveTimeToLocalStorage(time)
+      updateTimeFromLocalStorage()
 
       isPressingKeyRef.current = true
       requestRef.current = null
@@ -135,6 +161,8 @@ const TimerPageContextProviderBase = ({
     isTimerRunning,
     time,
     currentScramble,
+    onResetTimesList,
+    timesList,
   }
 
   return (

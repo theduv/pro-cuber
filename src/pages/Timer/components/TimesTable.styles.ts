@@ -3,7 +3,6 @@ import { css } from '../../../../styled-system/css'
 export const mainContainer = css({
   display: 'block',
   overflow: 'auto',
-  height: '100%',
   backgroundColor: 'neutral.700',
 })
 

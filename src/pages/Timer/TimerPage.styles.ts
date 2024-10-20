@@ -30,3 +30,10 @@ export const scrambleCard = css({
   borderColor: 'neutral.700',
   boxShadow: '0 8px 12px rgba(125, 125, 125, 0.1)',
 })
+
+export const tableArea = css({
+  display: 'flex',
+  flexDirection: 'column',
+  height: 'full',
+  gap: '1rem',
+})

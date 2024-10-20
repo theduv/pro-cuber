@@ -9,15 +9,13 @@ import { Pattern } from '../../components/pattern/Pattern'
 import { scrambleCube } from '../../lib/methods/cube'
 import { solvedCube } from '../../lib/data/samples'
 import { TimesTable } from './components/TimesTable'
+import { buttonRecipe } from '../../components/recipes/button.recipe'
 
 const TimerPageBase = () => {
-  const { currentScramble } = useContext(TimerPageContext)
+  const { currentScramble, onResetTimesList: onResetTimes } =
+    useContext(TimerPageContext)
 
   const cube = solvedCube
-
-  const onResetTimes = () => {
-    localStorage.removeItem('times')
-  }
 
   if (!currentScramble) {
     return <div>loading...</div>
@@ -32,8 +30,10 @@ const TimerPageBase = () => {
           <Pattern cube={scrambleCube(cube, currentScramble)} />
         </div>
 
-        <div>
-          <button onClick={onResetTimes}>Reset times</button>
+        <div className={styles.tableArea}>
+          <button onClick={onResetTimes} className={buttonRecipe()}>
+            Reset times
+          </button>
 
           <TimesTable />
         </div>

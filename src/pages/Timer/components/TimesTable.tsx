@@ -1,30 +1,11 @@
-import { memo, useContext, useMemo } from 'react'
+import { memo, useContext } from 'react'
 
 import { TimerPageContext } from '../TimerPage.context'
 
 import * as styles from './TimesTable.styles'
-import { TimesTableDivider } from './TimesTableDivider'
-
-//TODO: use a hook to get the data source
-const getDataSource = () => {
-  const timesFromLocalStorage = localStorage.getItem('times')
-  const data = timesFromLocalStorage ? timesFromLocalStorage.split(';') : []
-
-  return data.map((time, index) => ({
-    key: index,
-    single: (parseFloat(time) / 1000).toFixed(2),
-  }))
-}
 
 const TimesTableBase = () => {
-  const { isTimerRunning } = useContext(TimerPageContext)
-
-  const dataSource = useMemo(
-    () => getDataSource(),
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isTimerRunning],
-  )
+  const { timesList } = useContext(TimerPageContext)
 
   return (
     <div className={styles.mainContainer}>
@@ -40,15 +21,11 @@ const TimesTableBase = () => {
         </thead>
 
         <tbody className={styles.tbody}>
-          {dataSource.map((data) => (
-            <tr key={data.key} className={styles.tableRow}>
-              <th className={styles.bodyCell}>{data.single}</th>
-
-              <TimesTableDivider />
+          {timesList.map((data, key) => (
+            <tr key={key} className={styles.tableRow}>
+              <th className={styles.bodyCell}>{data}</th>
 
               <td className={styles.bodyCell}>0.00</td>
-
-              <TimesTableDivider />
 
               <td className={styles.bodyCell}>0.00</td>
             </tr>
