@@ -5,9 +5,8 @@ import { TimerPageContext } from './TimerPage.context'
 
 import * as styles from './TimerPage.styles'
 import { TimeDisplay } from './components/TimeDisplay'
-import { Cube } from '../../lib/types/cube'
 import { Pattern } from '../../components/pattern/Pattern'
-import { CubeMovementR } from '../../lib/methods/cube'
+import { scrambleCube } from '../../lib/methods/cube'
 import { solvedCube } from '../../lib/data/samples'
 
 const TimerPageBase = () => {
@@ -15,16 +14,20 @@ const TimerPageBase = () => {
 
   const cube = solvedCube
 
+  if (!currentScramble) {
+    return <div>loading...</div>
+  }
+
   return (
     <Page>
       <div className={styles.mainContainer}>
-        <div className={styles.scrambleContainer}>{currentScramble}</div>
+        <div>
+          <div className={styles.scrambleContainer}>{currentScramble}</div>
+        </div>
+        <Pattern cube={scrambleCube(cube, currentScramble)} />
 
         <TimeDisplay />
 
-        <Pattern cube={cube} />
-
-        <Pattern cube={CubeMovementR(cube)} />
         <div />
       </div>
     </Page>
