@@ -4,12 +4,13 @@ export const mainContainer = css({
   width: 'full',
   height: 'full',
   display: 'flex',
+  flexDirection: 'column',
   justifyContent: 'space-between',
   alignItems: 'center',
 })
 
-export const timerContainer = (shouldHighlightTime: boolean) =>
-  css({
-    fontSize: '5rem',
-    color: shouldHighlightTime ? 'success.500' : 'gray.200',
-  })
+export const scrambleContainer = css({
+  fontSize: 'xl',
+  fontWeight: 'semi-bold',
+  marginBottom: 4,
+})

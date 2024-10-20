@@ -8,18 +8,22 @@ import {
   useState,
 } from 'react'
 
+import { randomScrambleForEvent } from 'cubing/scramble'
+
 const STARTING_KEY = 'Space'
 
 type TimerPageContextValue = {
   isPressingStartingKey: boolean
   isTimerRunning: boolean
   time: number
+  currentScramble: string
 }
 
 export const TimerPageContext = createContext<TimerPageContextValue>({
   isPressingStartingKey: false,
   isTimerRunning: false,
   time: 0,
+  currentScramble: '',
 })
 
 type TimerPageContextProviderProps = PropsWithChildren
@@ -40,10 +44,21 @@ const TimerPageContextProviderBase = ({
   const [time, setTime] = useState(0)
   const [isPressingStartingKey, setIsPressingStartingKey] = useState(false)
   const [isTimerRunning, setIsTimerRunning] = useState(false)
+  const [currentScramble, setCurrentScramble] = useState('')
 
   const requestRef = useRef<number | null>(null)
   const previousTimeRef = useRef<number | null>(null)
   const isPressingKeyRef = useRef<boolean>(false)
+
+  const updateScramble = useCallback(async () => {
+    const res = await randomScrambleForEvent('333')
+
+    setCurrentScramble(res.toString())
+  }, [setCurrentScramble])
+
+  useEffect(() => {
+    updateScramble()
+  }, [])
 
   const animate = useCallback(
     (time: number) => {
@@ -59,7 +74,7 @@ const TimerPageContextProviderBase = ({
   )
 
   const keyupHandler = useCallback(
-    (e: KeyboardEvent) => {
+    async (e: KeyboardEvent) => {
       setIsPressingStartingKey(false)
 
       const keyPressedCode = e.code
@@ -91,10 +106,11 @@ const TimerPageContextProviderBase = ({
       cancelAnimationFrame(requestRef.current)
       saveTimeToLocalStorage(time)
 
-      isPressingKeyRef.current = true
+      isPressingKeyRef.current = false
       requestRef.current = null
       previousTimeRef.current = null
       setIsTimerRunning(false)
+      updateScramble()
     },
     [isPressingKeyRef, setIsPressingStartingKey, isTimerRunning, time],
   )
@@ -113,9 +129,8 @@ const TimerPageContextProviderBase = ({
     isPressingStartingKey,
     isTimerRunning,
     time,
+    currentScramble,
   }
-
-  console.log(isPressingKeyRef.current)
 
   return (
     <TimerPageContext.Provider value={contextValue}>

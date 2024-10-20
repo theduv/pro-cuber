@@ -1,7 +1,6 @@
 import { memo, useContext, useMemo } from 'react'
 
 import { TimerPageContext } from '../TimerPage.context'
-import Table from '../../../components/table/Table'
 
 const columns = [
   {
