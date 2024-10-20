@@ -8,42 +8,12 @@ import { TimeDisplay } from './components/TimeDisplay'
 import { Cube } from '../../lib/types/cube'
 import { Pattern } from '../../components/pattern/Pattern'
 import { CubeMovementR } from '../../lib/methods/cube'
+import { solvedCube } from '../../lib/data/samples'
 
 const TimerPageBase = () => {
   const { currentScramble } = useContext(TimerPageContext)
 
-  const cube: Cube = {
-    U: [
-      ['W', 'W', 'W'],
-      ['W', 'W', 'W'],
-      ['W', 'W', 'W'],
-    ],
-    L: [
-      ['O', 'O', 'O'],
-      ['O', 'O', 'O'],
-      ['O', 'O', 'O'],
-    ],
-    F: [
-      ['G', 'G', 'G'],
-      ['G', 'G', 'G'],
-      ['G', 'G', 'G'],
-    ],
-    R: [
-      ['R', 'R', 'R'],
-      ['R', 'R', 'R'],
-      ['R', 'R', 'R'],
-    ],
-    B: [
-      ['B', 'B', 'B'],
-      ['B', 'B', 'B'],
-      ['B', 'B', 'B'],
-    ],
-    D: [
-      ['Y', 'Y', 'Y'],
-      ['Y', 'Y', 'Y'],
-      ['Y', 'Y', 'Y'],
-    ],
-  }
+  const cube = solvedCube
 
   return (
     <Page>
@@ -53,6 +23,7 @@ const TimerPageBase = () => {
         <TimeDisplay />
 
         <Pattern cube={cube} />
+
         <Pattern cube={CubeMovementR(cube)} />
         <div />
       </div>

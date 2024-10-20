@@ -30,14 +30,14 @@ export const secondFace = css({
   display: 'flex',
   flexDirection: 'column',
   gap: '2px',
-  gridArea: '2 / 2 / 3 / 3',
+  gridArea: '2 / 1 / 3 / 2',
 })
 
 export const thirdFace = css({
   display: 'flex',
   flexDirection: 'column',
   gap: '2px',
-  gridArea: '2 / 1 / 3 / 2',
+  gridArea: '2 / 2 / 3 / 3',
 })
 
 export const fourthFace = css({
