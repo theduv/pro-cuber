@@ -36,9 +36,7 @@ const TimerPageBase = () => {
             Reset times
           </button>
 
-          <div>
-            <TimesTable />
-          </div>
+          <TimesTable />
         </div>
 
         <div className={styles.scrambleWithTime}>
