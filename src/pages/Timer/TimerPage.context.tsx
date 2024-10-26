@@ -37,7 +37,6 @@ const getTimesFromLocalStorage = () => {
   const timesFromLocalStorage = localStorage.getItem('times')
   const data = timesFromLocalStorage ? timesFromLocalStorage.split(';') : []
 
-  console.log({ data })
   return data.map((time) => parseFloat(time).toFixed(2))
 }
 
@@ -124,8 +123,6 @@ const TimerPageContextProviderBase = ({
 
       if (keyPressedCode !== STARTING_KEY) return
 
-      console.log(oldIsPressingKey)
-
       if (oldIsPressingKey || isTimerRunning) {
         return
       }
@@ -140,8 +137,6 @@ const TimerPageContextProviderBase = ({
   const keydownHandler = useCallback(
     (e: KeyboardEvent) => {
       const keyPressedCode = e.code
-
-      console.log(keyPressedCode)
 
       if (e.ctrlKey && e.key === 'Backspace') {
         onRemoveLastTime()
