@@ -38,7 +38,7 @@ const getTimesFromLocalStorage = () => {
   const data = timesFromLocalStorage ? timesFromLocalStorage.split(';') : []
 
   console.log({ data })
-  return data.map((time) => (parseFloat(time) / 1000).toFixed(2))
+  return data.map((time) => parseFloat(time).toFixed(2))
 }
 
 const saveTimeToLocalStorage = (time: number) => {
@@ -49,7 +49,7 @@ const saveTimeToLocalStorage = (time: number) => {
 
   const newTimesArray = [...parsedTimesFromLocalStorage]
 
-  newTimesArray.push(time.toString())
+  newTimesArray.push((time / 1000).toFixed(2).toString())
 
   localStorage.setItem('times', newTimesArray.join(';'))
 }
