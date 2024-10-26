@@ -8,5 +8,9 @@ export const buttonRecipe = cva({
     fontWeight: 'bold',
     textTransform: 'uppercase',
     borderRadius: 'sm',
+    transition: 'background-color 0.2s',
+    _hover: {
+      backgroundColor: 'primary.600',
+    },
   },
 })

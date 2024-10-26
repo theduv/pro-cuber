@@ -1,4 +1,4 @@
-import { memo, useContext } from 'react'
+import { memo, useCallback, useContext, useRef } from 'react'
 
 import { Page } from '../../domain/page/Page'
 import { TimerPageContext } from './TimerPage.context'
@@ -14,8 +14,12 @@ import { buttonRecipe } from '../../components/recipes/button.recipe'
 const TimerPageBase = () => {
   const { currentScramble, onResetTimesList: onResetTimes } =
     useContext(TimerPageContext)
+  const resetTimesButtonRef = useRef<HTMLButtonElement>(null)
 
-  const cube = solvedCube
+  const onClickResetTimes = useCallback(() => {
+    onResetTimes()
+    resetTimesButtonRef.current?.blur()
+  }, [onResetTimes])
 
   if (!currentScramble) {
     return <div>loading...</div>
@@ -27,11 +31,14 @@ const TimerPageBase = () => {
         <div className={styles.scrambleCard}>
           <div className={styles.scrambleContainer}>{currentScramble}</div>
 
-          <Pattern cube={scrambleCube(cube, currentScramble)} />
+          <Pattern cube={scrambleCube(solvedCube, currentScramble)} />
         </div>
 
         <div className={styles.tableArea}>
-          <button onClick={onResetTimes} className={buttonRecipe()}>
+          <button
+            onClick={onClickResetTimes}
+            className={buttonRecipe()}
+            ref={resetTimesButtonRef}>
             Reset times
           </button>
 

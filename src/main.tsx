@@ -12,6 +12,7 @@ const queryClient = new QueryClient()
 
 if (container) {
   const root = createRoot(container)
+
   root.render(
     <QueryClientProvider client={queryClient}>
       <StyleProvider layer>
