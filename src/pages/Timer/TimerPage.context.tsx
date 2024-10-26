@@ -54,6 +54,17 @@ const saveTimeToLocalStorage = (time: number) => {
   localStorage.setItem('times', newTimesArray.join(';'))
 }
 
+const onRemoveLastTime = () => {
+  const timesFromLocalStorage = localStorage.getItem('times')
+  const parsedTimesFromLocalStorage = timesFromLocalStorage
+    ? timesFromLocalStorage.split(';')
+    : []
+
+  parsedTimesFromLocalStorage.pop()
+
+  localStorage.setItem('times', parsedTimesFromLocalStorage.join(';'))
+}
+
 const TimerPageContextProviderBase = ({
   children,
 }: TimerPageContextProviderProps) => {
@@ -129,6 +140,14 @@ const TimerPageContextProviderBase = ({
   const keydownHandler = useCallback(
     (e: KeyboardEvent) => {
       const keyPressedCode = e.code
+
+      console.log(keyPressedCode)
+
+      if (e.ctrlKey && e.key === 'Backspace') {
+        onRemoveLastTime()
+        updateTimeFromLocalStorage()
+        return
+      }
 
       if (keyPressedCode === STARTING_KEY) setIsPressingStartingKey(true)
 
