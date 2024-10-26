@@ -9,10 +9,16 @@ export const mainContainer = css({
   position: 'relative',
 })
 
-export const scrambleContainer = css({
+export const scrambleWithTime = css({
   fontSize: '1.5rem',
   fontWeight: 'semi-bold',
   marginBottom: 4,
+  display: 'flex',
+  flexDirection: 'column',
+  height: 'full',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  padding: '3rem 0',
 })
 
 export const scrambleCard = css({
@@ -20,15 +26,12 @@ export const scrambleCard = css({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '1rem',
   padding: '32px',
   borderWidth: '1px',
   borderRadius: 'md',
   backgroundColor: 'neutral.800',
   borderColor: 'neutral.700',
   boxShadow: '0 8px 12px rgba(125, 125, 125, 0.1)',
-  width: '25rem',
-  height: '25rem',
 })
 
 export const tableArea = css({

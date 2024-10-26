@@ -36,14 +36,20 @@ const TimerPageBase = () => {
             Reset times
           </button>
 
-          <TimesTable />
+          <div>
+            <TimesTable />
+          </div>
         </div>
 
-        <TimeDisplay />
+        <div className={styles.scrambleWithTime}>
+          {currentScramble}
+
+          <TimeDisplay />
+
+          <div />
+        </div>
 
         <div className={styles.scrambleCard}>
-          <div className={styles.scrambleContainer}>{currentScramble}</div>
-
           <Pattern cube={scrambleCube(solvedCube, currentScramble)} />
         </div>
       </div>
