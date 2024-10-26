@@ -28,12 +28,6 @@ const TimerPageBase = () => {
   return (
     <Page>
       <div className={styles.mainContainer}>
-        <div className={styles.scrambleCard}>
-          <div className={styles.scrambleContainer}>{currentScramble}</div>
-
-          <Pattern cube={scrambleCube(solvedCube, currentScramble)} />
-        </div>
-
         <div className={styles.tableArea}>
           <button
             onClick={onClickResetTimes}
@@ -47,7 +41,11 @@ const TimerPageBase = () => {
 
         <TimeDisplay />
 
-        <div />
+        <div className={styles.scrambleCard}>
+          <div className={styles.scrambleContainer}>{currentScramble}</div>
+
+          <Pattern cube={scrambleCube(solvedCube, currentScramble)} />
+        </div>
       </div>
     </Page>
   )

@@ -16,12 +16,10 @@ export const scrambleContainer = css({
 })
 
 export const scrambleCard = css({
-  position: 'absolute',
-  top: 0,
-  right: 0,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  justifyContent: 'space-between',
   gap: '1rem',
   padding: '32px',
   borderWidth: '1px',
@@ -29,6 +27,8 @@ export const scrambleCard = css({
   backgroundColor: 'neutral.800',
   borderColor: 'neutral.700',
   boxShadow: '0 8px 12px rgba(125, 125, 125, 0.1)',
+  width: '25rem',
+  height: '25rem',
 })
 
 export const tableArea = css({
