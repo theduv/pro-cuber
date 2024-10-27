@@ -17,7 +17,7 @@ type TimerPageContextValue = {
   isPressingStartingKey: boolean
   isTimerRunning: boolean
   time: number
-  currentScramble: string
+  currentScramble: string | null
   onResetTimesList: () => void
   timesList: string[]
 }
@@ -26,7 +26,7 @@ export const TimerPageContext = createContext<TimerPageContextValue>({
   isPressingStartingKey: false,
   isTimerRunning: false,
   time: 0,
-  currentScramble: '',
+  currentScramble: null,
   onResetTimesList: noop,
   timesList: [],
 })
@@ -70,7 +70,7 @@ const TimerPageContextProviderBase = ({
   const [time, setTime] = useState(0)
   const [isPressingStartingKey, setIsPressingStartingKey] = useState(false)
   const [isTimerRunning, setIsTimerRunning] = useState(false)
-  const [currentScramble, setCurrentScramble] = useState('')
+  const [currentScramble, setCurrentScramble] = useState<string | null>(null)
   const [timesList, setTimesList] = useState<string[]>([])
 
   const requestRef = useRef<number | null>(null)

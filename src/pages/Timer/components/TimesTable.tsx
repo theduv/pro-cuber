@@ -4,10 +4,10 @@ import { mean } from 'lodash'
 import { TimerPageContext } from '../TimerPage.context'
 import * as styles from './TimesTable.styles'
 
-const getAvgForLast = (times: number[], last: number) => {
-  if (times.length < last) return '-'
+const getAvgForLast = (times: number[], last: number, index: number) => {
+  if (index < last) return '-'
 
-  return mean(times.slice(times.length - last, times.length)).toFixed(2)
+  return mean(times.slice(index - last, index)).toFixed(2)
 }
 
 const TimesTableBase = () => {
@@ -50,19 +50,19 @@ const TimesTableBase = () => {
               <th className={styles.bodyCell}>{data}</th>
 
               <td className={styles.bodyCell}>
-                {getAvgForLast(timesAsNumbers, 5)}
+                {getAvgForLast(timesAsNumbers, 5, index)}
               </td>
 
               <td className={styles.bodyCell}>
-                {getAvgForLast(timesAsNumbers, 12)}
+                {getAvgForLast(timesAsNumbers, 12, index)}
               </td>
 
               <td className={styles.bodyCell}>
-                {getAvgForLast(timesAsNumbers, 50)}
+                {getAvgForLast(timesAsNumbers, 50, index)}
               </td>
 
               <td className={styles.bodyCell}>
-                {getAvgForLast(timesAsNumbers, 100)}
+                {getAvgForLast(timesAsNumbers, 100, index)}
               </td>
             </tr>
           )

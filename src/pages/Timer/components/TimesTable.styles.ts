@@ -5,13 +5,14 @@ const BODY_CELL_HEIGHT = '3rem'
 
 export const mainContainer = css({
   overflow: 'hidden',
-  borderRadius: '8px',
+  borderRadius: '3px',
   maxHeight: '100%',
   backgroundColor: 'neutral.600',
 })
 
 export const tbody = css({
   ...scrollbar, // doesnt work. I mean, it does work but not all the time
+  scrollbar: 'hidden',
   overflowY: 'scroll',
   height: '100%',
   display: 'block',
@@ -20,7 +21,7 @@ export const tbody = css({
 export const tableHead = css({
   position: 'sticky',
   display: 'flex',
-  borderTopRadius: '8px',
+  borderTopRadius: '3px',
   backgroundColor: 'neutral.700',
   top: '0',
 })
@@ -36,6 +37,7 @@ export const headerCell = css({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  cursor: 'pointer',
 })
 
 export const bodyCell = css({
@@ -44,4 +46,8 @@ export const bodyCell = css({
   padding: '8px',
   alignItems: 'center',
   width: '100%',
+  '&:hover': {
+    backgroundColor: 'neutral.800',
+    transition: 'background-color 0.2s',
+  },
 })
