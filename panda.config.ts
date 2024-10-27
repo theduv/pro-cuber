@@ -40,6 +40,18 @@ export default defineConfig({
             800: { value: colors.purple[800] },
             900: { value: colors.purple[900] },
           },
+          orange: {
+            50: { value: colors.orange[50] },
+            100: { value: colors.orange[100] },
+            200: { value: colors.orange[200] },
+            300: { value: colors.orange[300] },
+            400: { value: colors.orange[400] },
+            500: { value: colors.orange[500] }, // Default secondary
+            600: { value: colors.orange[600] },
+            700: { value: colors.orange[700] },
+            800: { value: colors.orange[800] },
+            900: { value: colors.orange[900] },
+          },
           accent: {
             50: { value: colors.amber[50] },
             100: { value: colors.amber[100] },

@@ -11,7 +11,7 @@ export const squareRecipe = cva({
       R: { backgroundColor: 'error.500' },
       B: { backgroundColor: 'info.500' },
       Y: { backgroundColor: 'warning.400' },
-      O: { backgroundColor: 'amber.600' },
+      O: { backgroundColor: 'orange.400' },
       G: { backgroundColor: 'success.500' },
     },
     size: {
