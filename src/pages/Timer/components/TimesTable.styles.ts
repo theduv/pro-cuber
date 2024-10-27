@@ -37,7 +37,6 @@ export const headerCell = css({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  cursor: 'pointer',
 })
 
 export const bodyCell = css({
@@ -46,6 +45,7 @@ export const bodyCell = css({
   padding: '8px',
   alignItems: 'center',
   width: '100%',
+  cursor: 'pointer',
   '&:hover': {
     backgroundColor: 'neutral.800',
     transition: 'background-color 0.2s',

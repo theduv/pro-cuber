@@ -41,13 +41,13 @@ const TimesTableBase = () => {
       </thead>
 
       <tbody className={styles.tbody}>
-        {timesList.map((data, index) => {
+        {timesList.map((single, index) => {
           return (
             <tr
               key={index}
               className={styles.tableRow}
               ref={index === timesList.length - 1 ? lastTimeRef : null}>
-              <th className={styles.bodyCell}>{data}</th>
+              <th className={styles.bodyCell}>{single}</th>
 
               <td className={styles.bodyCell}>
                 {getAvgForLast(timesAsNumbers, 5, index)}

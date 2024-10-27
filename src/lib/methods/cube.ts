@@ -177,7 +177,6 @@ export const cubeMovementD = (cube: Cube): Cube => {
 }
 
 export const cubeMovementL = (cube: Cube): Cube => {
-  // TODO
   const newCube = { ...cube }
 
   const { D, F, B, L, U } = newCube
@@ -191,7 +190,7 @@ export const cubeMovementL = (cube: Cube): Cube => {
   const newD: Face = [
     [F[0][0], D[0][1], D[0][2]],
     [F[1][0], D[1][1], D[1][2]],
-    [F[2][0], D[1][1], D[1][2]],
+    [F[2][0], D[2][1], D[2][2]],
   ]
 
   const newB: Face = [
@@ -293,8 +292,9 @@ export const scrambleCube = (cube: Cube, scramble: string): Cube => {
     }
 
     for (let i = 0; i < numberOfRotations; i++) {
-      newCube = cubeMovementsMap[rotation](newCube)
+      newCube = { ...cubeMovementsMap[rotation](newCube) }
     }
   }
+
   return newCube
 }
